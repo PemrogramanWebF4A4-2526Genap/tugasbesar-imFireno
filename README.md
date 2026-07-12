@@ -1,64 +1,361 @@
+# JasaMarket
 
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+A modern service marketplace platform built with Laravel 12 and Livewire 3, connecting service providers (sellers) with customers (buyers) in Indonesia.
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## 🚀 Features
 
-## About Laravel
+### User Roles
+- **Admin**: Full system management including users, categories, and comprehensive analytics
+- **Penjual (Seller)**: Service management dashboard with CRUD operations for their services
+- **Pembeli (Buyer)**: Browse, purchase services, and manage orders with verification system
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Key Features
+- **Authentication System**: Email-based registration with OTP verification
+- **Role-Based Access Control**: Middleware-based authorization for different user roles
+- **Service Management**: Complete CRUD operations for sellers to manage their services
+- **Category System**: Organized service categories for better navigation
+- **Search & Filtering**: Advanced search with category and status filters
+- **Shopping Cart**: Add services to cart and checkout
+- **Payment Integration**: Midtrans payment gateway integration
+- **Order Management**: Track order status and history
+- **Invoice Generation**: PDF invoice download for completed orders
+- **Rating System**: Rate and review purchased services
+- **Admin Analytics**: Comprehensive dashboard with sales charts (daily, monthly, weekly)
+- **Reports**: Detailed sales reports with visual analytics
+- **Responsive Design**: Mobile-friendly UI built with Tailwind CSS
+- **Real-time Updates**: Livewire-powered reactive components
+- **Soft Deletes**: Data recovery capability for services
+- **File Upload**: Image upload for service thumbnails
+- **Notifications**: SweetAlert for user feedback
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 📋 Requirements
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- PHP >= 8.2
+- Composer
+- Node.js & NPM
+- MySQL/MariaDB
+- Laravel 12
+
+## 🛠️ Tech Stack
+
+- **Backend**: Laravel 12
+- **Frontend**: Livewire 3, Blade, Tailwind CSS
+- **Database**: MySQL with Eloquent ORM
+- **Authentication**: Laravel Auth with OTP verification
+- **Payment**: Midtrans Payment Gateway
+- **Charts**: Chart.js for analytics visualization
+- **UI Components**: SweetAlert for notifications, Font Awesome icons
+- **PDF Generation**: Laravel DomPDF
+- **Excel Export**: Maatwebsite Excel
+
+## 📦 Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/PemrogramanWebF4A4-2526Genap/tugasbesar-imFireno.git
+   cd jasamarket
+   ```
+
+2. **Install dependencies**
+   ```bash
+   composer install
+   npm install
+   ```
+
+3. **Environment setup**
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
+
+4. **Configure database**
+   Edit `.env` file:
+   ```env
+   DB_DATABASE=jasamarket
+   DB_USERNAME=your_username
+   DB_PASSWORD=your_password
+   ```
+
+5. **Configure Midtrans**
+   Add your Midtrans credentials to `.env`:
+   ```env
+   MIDTRANS_SERVER_KEY=your_server_key
+   MIDTRANS_CLIENT_KEY=your_client_key
+   MIDTRANS_IS_PRODUCTION=false
+   ```
+
+6. **Run migrations**
+   ```bash
+   php artisan migrate
+   ```
+
+7. **Build assets**
+   ```bash
+   npm run build
+   ```
+
+8. **Start development server**
+   ```bash
+   php artisan serve
+   npm run dev
+   ```
+
+## 🗂️ Project Structure
+
+```
+jasamarket/
+├── app/
+│   ├── Http/
+│   │   ├── Controllers/
+│   │   │   ├── AuthController.php          # Authentication logic
+│   │   │   ├── VerificationController.php  # OTP verification
+│   │   │   ├── InvoiceController.php       # PDF invoice generation
+│   │   │   ├── RatingController.php        # Rating management
+│   │   │   └── HomeController.php          # Buyer home
+│   │   ├── Middleware/
+│   │   │   ├── CheckRole.php               # Role-based access
+│   │   │   └── CheckStatus.php             # Account status check
+│   │   └── Requests/
+│   │       └── ServiceFormRequest.php      # Service validation
+│   ├── Livewire/
+│   │   ├── Admin/                          # Admin components
+│   │   │   ├── Dashboard.php               # Admin dashboard with analytics
+│   │   │   ├── User.php                    # User management
+│   │   │   ├── Kategori.php                # Category CRUD
+│   │   │   └── Laporan.php                 # Sales reports
+│   │   ├── Seller/                         # Seller components
+│   │   │   ├── Dashboard.php               # Seller dashboard
+│   │   │   └── Service/                    # Service management
+│   │   └── Pembeli/                        # Buyer components
+│   │       ├── FloatingBar.php             # Floating navigation
+│   │       ├── Kategori.php                # Category browsing
+│   │       ├── Keranjang.php               # Shopping cart
+│   │       ├── Pesanan.php                 # Order management
+│   │       └── Home.php                    # Home page
+│   ├── Models/
+│   │   ├── User.php                        # User model with relationships
+│   │   ├── Service.php                     # Service model with soft deletes
+│   │   ├── Category.php                    # Category model
+│   │   ├── Order.php                       # Order model
+│   │   ├── OrderItem.php                   # Order item model
+│   │   ├── Rating.php                      # Rating model
+│   │   └── Verification.php                # OTP verification model
+│   ├── Services/
+│   │   └── AnalyticsService.php            # Analytics data service
+│   ├── Policies/
+│   │   └── ServicePolicy.php               # Service authorization
+│   └── Mail/
+│       └── OtpEmail.php                    # OTP email template
+├── database/
+│   └── migrations/
+│       ├── 0001_01_01_000000_create_users_table.php
+│       ├── 2026_07_03_102654_create_verifications_table.php
+│       ├── 2026_07_09_122825_create_categories_table.php
+│       ├── 2026_07_09_122906_create_services_table.php
+│       ├── create_orders_table.php
+│       ├── create_order_items_table.php
+│       └── create_ratings_table.php
+├── resources/
+│   ├── views/
+│   │   ├── layout/                         # Layout templates
+│   │   │   ├── admin.blade.php
+│   │   │   ├── seller.blade.php
+│   │   │   ├── master.blade.php
+│   │   │   ├── _navbar.blade.php
+│   │   │   └── _floatingbar.blade.php
+│   │   ├── admin/                          # Admin pages
+│   │   ├── seller/                         # Seller pages
+│   │   ├── pembeli/                        # Buyer pages
+│   │   ├── auth/                           # Authentication pages
+│   │   ├── verification/                   # OTP verification pages
+│   │   └── livewire/                       # Livewire component views
+└── routes/
+    └── web.php                             # Route definitions
+```
+
+## 🗄️ Database Schema
+
+### Users Table
+- `id`, `name`, `email`, `password`
+- `role` (admin, penjual, pembeli)
+- `status` (active, verify, inactive)
+- Relationships: hasMany Services, hasMany Verifications, hasMany Orders
+
+### Verifications Table
+- `id`, `user_id`, `unique_id`, `otp`
+- `type` (register, reset_password)
+- `send_via` (email, sms, wa)
+- `status` (active, valid, invalid)
+- `resend` counter
+
+### Categories Table
+- `id`, `name`, `description`
+- Relationships: hasMany Services
+
+### Services Table
+- `id`, `seller_id`, `category_id`, `name`, `slug`
+- `description`, `price`, `duration`
+- `service_type` (online, offline), `location`
+- `revision`, `thumbnail`, `status` (active, draft, inactive)
+- Soft deletes enabled
+- Relationships: belongsTo User, belongsTo Category, hasMany Ratings
+
+### Orders Table
+- `id`, `user_id`, `total_amount`, `status`
+- `snap_token`, `proof_of_work`, `job_description`
+- Relationships: belongsTo User, hasMany OrderItems
+
+### Order Items Table
+- `id`, `order_id`, `service_id`, `quantity`, `price`
+- Relationships: belongsTo Order, belongsTo Service
+
+### Ratings Table
+- `id`, `user_id`, `service_id`, `rating`, `review`
+- Relationships: belongsTo User, belongsTo Service
+
+## 🔐 Authentication & Authorization
+
+### Authentication Flow
+1. User registers with email and password
+2. System generates 6-digit OTP
+3. OTP sent to user's email
+4. User verifies OTP to activate account
+5. User can login with credentials
+
+### Authorization
+- **Admin**: Full access to all admin routes
+- **Seller**: Can only manage their own services
+- **Buyer**: Can browse and purchase services (after verification)
+
+### Middleware
+- `check_role`: Validates user role access
+- `check_status`: Ensures account is active/verified
+
+## 💳 Payment Integration
+
+### Midtrans Integration
+- Payment gateway for secure transactions
+- Support for various payment methods
+- Webhook callback for payment status updates
+- Order status tracking (pending, success, failed, cancelled)
+
+## 📊 Analytics & Reports
+
+### Admin Dashboard
+- Total revenue, orders, users, sellers, services statistics
+- Daily sales chart (30 days)
+- Monthly sales chart (12 months)
+- Dual Y-axis for revenue and order count
+
+### Reports Page
+- Detailed daily sales analytics
+- Average revenue and orders per day
+- Visual charts with Chart.js
+
+## 🎯 API Routes
+
+### Public Routes
+- `GET /` - Landing page
+- `GET /login` - Login page
+- `POST /login` - Login submission
+- `GET /register` - Registration page
+- `POST /register` - Registration submission
+- `POST /logout` - Logout
+
+### Admin Routes (Protected)
+- `/dashboard` - Admin dashboard with analytics
+- `/dashboard/user` - User management
+- `/dashboard/kategori` - Category management
+- `/dashboard/laporan` - Sales reports
+
+### Seller Routes (Protected)
+- `/seller/dashboard` - Seller dashboard
+- `/seller/jasa` - Service listing
+- `/seller/service` - Service management
+- `/seller/service/create` - Create service
+- `/seller/service/{id}/edit` - Edit service
+- `/seller/pesanan` - Order management
+
+### Buyer Routes (Protected)
+- `/home` - Buyer home
+- `/kategori` - Browse by category
+- `/keranjang` - Shopping cart
+- `/checkout` - Checkout process
+- `/pembayaran` - Payment page
+- `/pesanan` - Order history
+- `/verify` - OTP verification request
+- `/verify/{unique_id}` - OTP verification form
+- `POST /verify` - Send OTP
+- `PUT /verify/{unique_id}` - Verify OTP
+- `POST /rating` - Submit rating
+- `PUT /rating/{id}` - Update rating
+- `DELETE /rating/{id}` - Delete rating
+- `GET /pesanan/{order}/invoice/download` - Download invoice PDF
+
+### API Routes
+- `POST /api/midtrans/callback` - Midtrans payment callback
+
+## 🧪 Testing
+
+Run the test suite:
+```bash
+php artisan test
+```
+
+## 📝 Development Scripts
+
+```bash
+# Setup fresh installation
+composer run setup
+
+# Development mode with hot reload
+composer run dev
+
+# Run tests
+composer run test
+```
+
+## 🎨 UI Features
+
+### Responsive Design
+- Mobile-first approach
+- Tailwind CSS for styling
+- Font Awesome icons
+- SweetAlert notifications
+- Chart.js for data visualization
+
+### Components
+- Floating navigation bar for buyers
+- Sidebar navigation for admin and sellers
+- Modal dialogs for forms
+- Data tables with pagination
+- Image upload with preview
+- Rating stars system
+
+## 📞 Support
+
+For support, email support@jasamarket.com or open an issue in the repository.
+
+## 👥 Team
+
+- **Project**: JasaMarket
+- **Course**: Pemrograman Web F4A4
+- **Academic Year**: 2025/2026 Genap
+
+## 📄 License
+
+This project is open-sourced software licensed under the MIT license.
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 ## Learning Laravel
 
 Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
 
 If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-=======
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/4XK9jMsh)
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-2e0aaae1b6195c2367325f4f02e2d04e9abb55f0b24a779b69b11b9e10269abc.svg)](https://classroom.github.com/online_ide?assignment_repo_id=24223093&assignment_repo_type=AssignmentRepo)
->>>>>>> 7773d0b898bd92705b897d31628f38a20ff28420
