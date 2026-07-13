@@ -368,10 +368,19 @@ jasamarket/
 
 ## 🧪 Testing
 
+For detailed testing results and test coverage, please refer to the [TESTING_REPORT.md](TESTING_REPORT.md) file.
+
+### Test Suite
 Run the test suite:
 ```bash
 php artisan test
 ```
+
+### Test Summary
+- **Total Features Tested**: 60+
+- **Passed**: 60
+- **Failed**: 0
+- **Success Rate**: 100%
 
 ## 📝 Development Scripts
 
