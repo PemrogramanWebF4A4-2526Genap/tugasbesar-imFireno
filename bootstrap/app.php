@@ -15,6 +15,9 @@ return Application::configure(basePath: dirname(__DIR__))
             'check_role' => \App\Http\Middleware\CheckRole::class,
             'check_status' => \App\Http\Middleware\CheckStatus::class,
         ]);
+        $middleware->validateCsrfTokens(except: [
+            'api/midtrans/callback',
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

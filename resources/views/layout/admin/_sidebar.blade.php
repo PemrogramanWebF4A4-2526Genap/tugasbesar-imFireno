@@ -26,14 +26,6 @@
 
         </a>
 
-        <a wire:navigate href="{{ route('admin.seller') }}"
-           class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition-colors @yield('MenuActiveSeller')">
-
-            <i class="fas fa-store w-5 text-center"></i>
-            Seller
-
-        </a>
-
         <a wire:navigate href="{{ route('admin.kategori') }}"
            class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition-colors @yield('MenuActiveKategori')">
 
@@ -42,19 +34,11 @@
 
         </a>
 
-        <a wire:navigate href="{{ route('admin.jasa') }}"
-           class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition-colors @yield('MenuActiveJasa')">
+        <a wire:navigate href="{{ route('admin.transaksi') }}"
+           class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition-colors @yield('MenuActiveTransaksi')">
 
-            <i class="fas fa-screwdriver-wrench w-5 text-center"></i>
-            Jasa
-
-        </a>
-
-        <a wire:navigate  href="{{ route('admin.pesanan') }}"
-           class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition-colors @yield('MenuActivePesanan')">
-
-            <i class="fas fa-shopping-bag w-5 text-center"></i>
-            Pesanan
+            <i class="fas fa-exchange-alt w-5 text-center"></i>
+            Transaksi
 
         </a>
 

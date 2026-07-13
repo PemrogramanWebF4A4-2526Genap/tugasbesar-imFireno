@@ -9,7 +9,7 @@
     <!-- Header -->
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-            <h1 class="text-2xl font-bold text-gray-900">Jasa Saya</h1>
+            
             <p class="text-gray-500">Kelola semua jasa yang Anda tawarkan</p>
         </div>
         <a href="{{ route('seller.service.create') }}" class="inline-flex items-center gap-2 bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 transition-colors">

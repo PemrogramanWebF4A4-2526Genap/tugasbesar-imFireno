@@ -64,5 +64,10 @@
 
 </div>
 
+@include('layout.script')
+@livewireScripts
+@include('layout._livewire-sweetalert')
+@livewire('edit-profile')
+@stack('scripts')
 </body>
 </html>

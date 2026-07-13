@@ -4,5 +4,5 @@
 @section('MenuActiveDashboard', 'bg-slate-700 text-white')
 
 @section('content')
-    @livewire('admin.dashboard.index')
+    @livewire('admin.dashboard')
 @endsection

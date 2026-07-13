@@ -38,4 +38,19 @@ class Service extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class);
+    }
+
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class);
+    }
+
+    public function averageRating()
+    {
+        return $this->ratings()->avg('rating') ?: 0;
+    }
 }

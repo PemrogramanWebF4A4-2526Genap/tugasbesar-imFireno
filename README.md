@@ -17,16 +17,22 @@ A modern service marketplace platform built with Laravel 12 and Livewire 3, conn
 - **Search & Filtering**: Advanced search with category and status filters
 - **Shopping Cart**: Add services to cart and checkout
 - **Payment Integration**: Midtrans payment gateway integration
-- **Order Management**: Track order status and history
-- **Invoice Generation**: PDF invoice download for completed orders
+- **Order Management**: Track order status and history with professional UI
+- **Invoice Generation**: PDF invoice generation with view and download capabilities
+- **Invoice Status**: Dynamic invoice status (LUNAS for paid orders)
+- **Order Detail Modals**: Comprehensive order details for buyers and sellers
 - **Rating System**: Rate and review purchased services
 - **Admin Analytics**: Comprehensive dashboard with sales charts (daily, monthly, weekly)
+- **Admin Transaction Management**: View all transactions with status filtering and pagination
+- **User Status Management**: Admin can activate/deactivate seller accounts
+- **Profile Management**: Edit profile feature for buyers to update their information
+- **Professional UI**: Modern, responsive design with stats cards and improved layouts
 - **Reports**: Detailed sales reports with visual analytics
 - **Responsive Design**: Mobile-friendly UI built with Tailwind CSS
 - **Real-time Updates**: Livewire-powered reactive components
 - **Soft Deletes**: Data recovery capability for services
-- **File Upload**: Image upload for service thumbnails
-- **Notifications**: SweetAlert for user feedback
+- **File Upload**: Image upload for service thumbnails and proof of work
+- **Notifications**: SweetAlert for user feedback and system notifications
 
 ## 📋 Requirements
 
@@ -110,6 +116,8 @@ jasamarket/
 │   │   │   ├── AuthController.php          # Authentication logic
 │   │   │   ├── VerificationController.php  # OTP verification
 │   │   │   ├── InvoiceController.php       # PDF invoice generation
+│   │   │   ├── Pembeli/
+│   │   │   │   └── InvoiceController.php    # Buyer invoice controller
 │   │   │   ├── RatingController.php        # Rating management
 │   │   │   └── HomeController.php          # Buyer home
 │   │   ├── Middleware/
@@ -120,18 +128,26 @@ jasamarket/
 │   ├── Livewire/
 │   │   ├── Admin/                          # Admin components
 │   │   │   ├── Dashboard.php               # Admin dashboard with analytics
-│   │   │   ├── User.php                    # User management
+│   │   │   ├── User/
+│   │   │   │   └── Index.php                # User management with status toggle
 │   │   │   ├── Kategori.php                # Category CRUD
+│   │   │   ├── Transaksi/
+│   │   │   │   └── Index.php                # Transaction management
 │   │   │   └── Laporan.php                 # Sales reports
 │   │   ├── Seller/                         # Seller components
 │   │   │   ├── Dashboard.php               # Seller dashboard
+│   │   │   ├── Pesanan.php                 # Order management with detail modal
 │   │   │   └── Service/                    # Service management
-│   │   └── Pembeli/                        # Buyer components
-│   │       ├── FloatingBar.php             # Floating navigation
-│   │       ├── Kategori.php                # Category browsing
-│   │       ├── Keranjang.php               # Shopping cart
-│   │       ├── Pesanan.php                 # Order management
-│   │       └── Home.php                    # Home page
+│   │   ├── Pembeli/                        # Buyer components
+│   │   │   ├── FloatingBar.php             # Floating navigation
+│   │   │   ├── Kategori.php                # Category browsing
+│   │   │   ├── Keranjang.php               # Shopping cart
+│   │   │   ├── Pesanan/
+│   │   │   │   └── Index.php                # Order management with detail modal
+│   │   │   └── Home.php                    # Home page
+│   │   ├── AllServices.php                 # Public service listing
+│   │   ├── EditProfile.php                 # Profile editing component
+│   │   └── Notifications.php                # Notification system
 │   ├── Models/
 │   │   ├── User.php                        # User model with relationships
 │   │   ├── Service.php                     # Service model with soft deletes
@@ -141,7 +157,8 @@ jasamarket/
 │   │   ├── Rating.php                      # Rating model
 │   │   └── Verification.php                # OTP verification model
 │   ├── Services/
-│   │   └── AnalyticsService.php            # Analytics data service
+│   │   ├── AnalyticsService.php            # Analytics data service
+│   │   └── NotificationService.php         # Notification service
 │   ├── Policies/
 │   │   └── ServicePolicy.php               # Service authorization
 │   └── Mail/
@@ -203,6 +220,7 @@ jasamarket/
 ### Orders Table
 - `id`, `user_id`, `total_amount`, `status`
 - `snap_token`, `proof_of_work`, `job_description`
+- Status: pending, success, confirmed, completed, rejected, failed
 - Relationships: belongsTo User, hasMany OrderItems
 
 ### Order Items Table
@@ -264,8 +282,9 @@ jasamarket/
 
 ### Admin Routes (Protected)
 - `/dashboard` - Admin dashboard with analytics
-- `/dashboard/user` - User management
+- `/dashboard/user` - User management with status toggle
 - `/dashboard/kategori` - Category management
+- `/dashboard/transaksi` - Transaction management with filtering
 - `/dashboard/laporan` - Sales reports
 
 ### Seller Routes (Protected)
@@ -274,7 +293,7 @@ jasamarket/
 - `/seller/service` - Service management
 - `/seller/service/create` - Create service
 - `/seller/service/{id}/edit` - Edit service
-- `/seller/pesanan` - Order management
+- `/seller/pesanan` - Order management with detail modal
 
 ### Buyer Routes (Protected)
 - `/home` - Buyer home
@@ -282,7 +301,7 @@ jasamarket/
 - `/keranjang` - Shopping cart
 - `/checkout` - Checkout process
 - `/pembayaran` - Payment page
-- `/pesanan` - Order history
+- `/pesanan` - Order history with detail modal
 - `/verify` - OTP verification request
 - `/verify/{unique_id}` - OTP verification form
 - `POST /verify` - Send OTP
@@ -290,10 +309,62 @@ jasamarket/
 - `POST /rating` - Submit rating
 - `PUT /rating/{id}` - Update rating
 - `DELETE /rating/{id}` - Delete rating
-- `GET /pesanan/{order}/invoice/download` - Download invoice PDF
+- `GET /pembeli/invoice/{order}/view` - View invoice in browser
+- `GET /pembeli/invoice/{order}/download` - Download invoice PDF
 
 ### API Routes
 - `POST /api/midtrans/callback` - Midtrans payment callback
+
+## 🆕 Recent Updates & Improvements
+
+### Invoice System Enhancements
+- **Invoice View**: Buyers can now view invoices directly in the browser
+- **Invoice Download**: PDF download functionality for all paid orders
+- **Dynamic Invoice Status**: Invoice shows "LUNAS" for paid orders (success, confirmed, completed)
+- **Invoice Accessibility**: Available for orders with status: success, confirmed, completed
+
+### Order Management Improvements
+- **Buyer Order Detail Modal**: Comprehensive order details with:
+  - Order information (date, total)
+  - Job description from buyer
+  - Proof of work preview (video/image/document)
+  - Service items with thumbnails
+  - Invoice view and download buttons
+- **Seller Order Detail Modal**: Complete order management with:
+  - Buyer information (name, email, avatar)
+  - Job description details
+  - Proof of work upload and management
+  - Service items (seller's services only)
+  - Action buttons (confirm, reject, complete, upload proof)
+- **Professional UI**: Modern card-based design with stats cards
+- **Stats Overview**: Quick statistics for order status distribution
+
+### Admin Features
+- **Transaction Management Page**: New page to view all platform transactions
+  - Search by order ID or buyer name
+  - Filter by order status
+  - Custom pagination with modern design
+  - Detailed order information display
+- **User Status Toggle**: Quick activate/deactivate for seller accounts
+- **Transaction Sidebar Menu**: Easy access to transaction management
+
+### User Experience Improvements
+- **Profile Editing**: Buyers can now edit their profile name
+  - Modal-based editing interface
+  - Real-time validation
+  - Success notifications
+- **Professional Order Cards**: Compact, information-rich order cards
+- **Stats Cards**: Visual statistics for quick overview
+- **Improved Empty States**: Better empty state design with CTAs
+- **Responsive Design**: Mobile-friendly layouts throughout
+
+### UI/UX Enhancements
+- **Modern Filter Design**: Pill-style filters with active states
+- **Gradient Icons**: Beautiful gradient icons for visual appeal
+- **Hover Effects**: Smooth transitions and hover states
+- **Better Typography**: Improved font hierarchy and spacing
+- **Color-coded Status**: Consistent color coding for order statuses
+- **Professional Modals**: Sticky headers and footers for better UX
 
 ## 🧪 Testing
 

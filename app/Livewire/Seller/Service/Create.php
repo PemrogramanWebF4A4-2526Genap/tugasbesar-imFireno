@@ -38,7 +38,7 @@ class Create extends Component
 
     public function mount()
     {
-        $this->categories = Category::all();
+        // Categories are passed directly to the view via render method
     }
 
     public function updatedServiceType()

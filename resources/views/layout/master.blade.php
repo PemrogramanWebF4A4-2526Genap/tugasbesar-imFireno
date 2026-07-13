@@ -1,302 +1,204 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title')</title>
+    <title>@yield('title', 'JasaMarket - Temukan Jasa Profesional')</title>
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+    </style>
+
+    @include('layout.style')
+    @livewireStyles
 </head>
-<body class="bg-slate-50">
+
+<body class="bg-gray-50 text-gray-800 antialiased selection:bg-emerald-500 selection:text-white">
 
     <!-- Navbar -->
     @include('layout._navbar')
-    @include('layout._floatingbar')
 
-    <!-- Hero -->
-    <section class="container mx-auto px-6 py-20">
-
-        <div class="grid md:grid-cols-2 gap-10 items-center">
-
-            <div>
-                <h1 class="text-5xl font-bold text-gray-800 leading-tight">
-                    Temukan Jasa Profesional
-                    Untuk Kebutuhan Anda
-                </h1>
-
-                <p class="mt-6 text-gray-600 text-lg">
-                    JasaMarket menghubungkan pelanggan dengan penyedia jasa terpercaya
-                    mulai dari teknisi, desain grafis, fotografi, cleaning service,
-                    hingga les privat.
-                </p>
-
-                <div class="mt-8 flex gap-4">
-                    <a href="#"
-                       class="bg-blue-600 text-white px-6 py-3 rounded-xl font-semibold">
-                        Cari Jasa
-                    </a>
-
-                    <a href="#"
-                       class="bg-orange-500 text-white px-6 py-3 rounded-xl font-semibold">
-                        Jadi Mitra
-                    </a>
-                </div>
-            </div>
-
-            <div>
-                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f"
-                     class="rounded-3xl shadow-xl">
-            </div>
-
+    <!-- Hero Section -->
+    <section class="relative pt-24 pb-32 overflow-hidden">
+        <!-- Background decorative elements -->
+        <div class="absolute inset-0 bg-gradient-to-br from-emerald-50 via-white to-teal-50 -z-10"></div>
+        <div
+            class="absolute top-0 right-0 -translate-y-12 translate-x-1/3 w-[800px] h-[800px] bg-gradient-to-tr from-emerald-200/40 to-teal-100/20 rounded-full blur-3xl -z-10">
         </div>
-
-    </section>
-
-    <!-- Search -->
-    <section class="container mx-auto px-6">
-
-        <div class="bg-white shadow-lg rounded-2xl p-6">
-
-            <h2 class="font-bold text-xl mb-4">
-                Cari Jasa
-            </h2>
-
-            <div class="grid md:grid-cols-4 gap-4">
-
-                <input type="text"
-                    placeholder="Cari jasa..."
-                    class="border rounded-xl p-3">
-
-                <select class="border rounded-xl p-3">
-                    <option>Kategori</option>
-                    <option>Cleaning Service</option>
-                    <option>Fotografi</option>
-                    <option>Les Privat</option>
-                </select>
-
-                <input type="text"
-                    placeholder="Lokasi"
-                    class="border rounded-xl p-3">
-
-                <button class="bg-blue-600 text-white rounded-xl">
-                    Cari Sekarang
-                </button>
-
-            </div>
-
+        <div
+            class="absolute bottom-0 left-0 translate-y-1/3 -translate-x-1/3 w-[600px] h-[600px] bg-gradient-to-tr from-blue-100/40 to-emerald-100/40 rounded-full blur-3xl -z-10">
         </div>
-
-    </section>
-
-    <!-- Kategori -->
-    <section class="container mx-auto px-6 py-16">
-
-        <h2 class="text-3xl font-bold text-center mb-10">
-            Kategori Populer
-        </h2>
-
-        <div class="grid md:grid-cols-4 gap-6">
-
-            <div class="bg-white rounded-2xl p-6 shadow text-center">
-                🧹
-                <h3 class="font-bold mt-3">Cleaning Service</h3>
-            </div>
-
-            <div class="bg-white rounded-2xl p-6 shadow text-center">
-                🔧
-                <h3 class="font-bold mt-3">Teknisi</h3>
-            </div>
-
-            <div class="bg-white rounded-2xl p-6 shadow text-center">
-                📷
-                <h3 class="font-bold mt-3">Fotografi</h3>
-            </div>
-
-            <div class="bg-white rounded-2xl p-6 shadow text-center">
-                🎓
-                <h3 class="font-bold mt-3">Les Privat</h3>
-            </div>
-
-        </div>
-
-    </section>
-
-    <!-- Jasa Populer -->
-    <section class="container mx-auto px-6 pb-20">
-
-        <h2 class="text-3xl font-bold mb-10">
-            Jasa Terpopuler
-        </h2>
-
-        <div class="grid md:grid-cols-3 gap-8">
-
-            <div class="bg-white rounded-2xl shadow overflow-hidden">
-
-                <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952"
-                    class="h-56 w-full object-cover">
-
-                <div class="p-5">
-
-                    <h3 class="font-bold text-lg">
-                        Cleaning Service Rumah
-                    </h3>
-
-                    <p class="text-gray-500 mt-2">
-                        Oleh Budi Service
-                    </p>
-
-                    <div class="flex justify-between mt-4">
-                        <span class="font-bold text-blue-600">
-                            Rp150.000
-                        </span>
-
-                        <span>
-                            ⭐ 4.9
-                        </span>
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="bg-white rounded-2xl shadow overflow-hidden">
-
-                <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3"
-                    class="h-56 w-full object-cover">
-
-                <div class="p-5">
-
-                    <h3 class="font-bold text-lg">
-                        Jasa Desain Logo
-                    </h3>
-
-                    <p class="text-gray-500 mt-2">
-                        Oleh Creative Studio
-                    </p>
-
-                    <div class="flex justify-between mt-4">
-                        <span class="font-bold text-blue-600">
-                            Rp250.000
-                        </span>
-
-                        <span>
-                            ⭐ 4.8
-                        </span>
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="bg-white rounded-2xl shadow overflow-hidden">
-
-                <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085"
-                    class="h-56 w-full object-cover">
-
-                <div class="p-5">
-
-                    <h3 class="font-bold text-lg">
-                        Service Komputer
-                    </h3>
-
-                    <p class="text-gray-500 mt-2">
-                        Oleh Tech Solution
-                    </p>
-
-                    <div class="flex justify-between mt-4">
-                        <span class="font-bold text-blue-600">
-                            Rp200.000
-                        </span>
-
-                        <span>
-                            ⭐ 5.0
-                        </span>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-    <!-- Cara Kerja -->
-    <section class="bg-blue-600 py-20">
 
         <div class="container mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
 
-            <h2 class="text-4xl font-bold text-white text-center mb-12">
-                Cara Kerja
-            </h2>
+                <!-- Text Content -->
+                <div class="max-w-2xl">
+                    <div
+                        class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-100/50 text-emerald-700 font-semibold text-sm mb-6 border border-emerald-200/50 backdrop-blur-sm">
+                        <span class="relative flex h-2 w-2">
+                            <span
+                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                        </span>
+                        Platform Jasa #1 di Indonesia
+                    </div>
 
-            <div class="grid md:grid-cols-3 gap-8 text-center">
+                    <h1 class="text-5xl md:text-6xl font-extrabold text-gray-900 leading-[1.1] tracking-tight mb-6">
+                        Temukan <span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-500">Jasa
+                            Profesional</span> Untuk Kebutuhan Anda
+                    </h1>
 
-                <div class="bg-white rounded-2xl p-8">
-                    <h3 class="font-bold text-xl mb-3">
-                        1. Cari Jasa
-                    </h3>
-                    <p>
-                        Pilih jasa yang sesuai kebutuhan.
+                    <p class="text-lg md:text-xl text-gray-600 mb-10 leading-relaxed">
+                        JasaMarket menghubungkan Anda dengan ribuan penyedia jasa terpercaya. Dari desain grafis hingga
+                        teknisi, semua ada di sini.
                     </p>
+
+
+                    <div class="mt-8 flex items-center gap-6 text-sm text-gray-500 font-medium">
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-check-circle text-emerald-500"></i> 100% Aman
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-check-circle text-emerald-500"></i> Jasa Terverifikasi
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-check-circle text-emerald-500"></i> Harga Transparan
+                        </div>
+                    </div>
                 </div>
 
-                <div class="bg-white rounded-2xl p-8">
-                    <h3 class="font-bold text-xl mb-3">
-                        2. Pesan
-                    </h3>
-                    <p>
-                        Lakukan pemesanan dengan mudah.
-                    </p>
-                </div>
+                <!-- Hero Image -->
+                <div class="relative hidden lg:block">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-tr from-emerald-500 to-teal-400 rounded-[2.5rem] rotate-3 scale-105 opacity-20 blur-lg">
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2000&auto=format&fit=crop"
+                        alt="Profesional bekerja"
+                        class="relative rounded-[2.5rem] shadow-2xl border-4 border-white object-cover h-[600px] w-full">
 
-                <div class="bg-white rounded-2xl p-8">
-                    <h3 class="font-bold text-xl mb-3">
-                        3. Selesai
-                    </h3>
-                    <p>
-                        Nikmati layanan terbaik dari mitra kami.
-                    </p>
+                    <!-- Floating Badge -->
+                    <div class="absolute -bottom-6 -left-6 bg-white p-5 rounded-2xl shadow-xl border border-gray-50 flex items-center gap-4 animate-bounce"
+                        style="animation-duration: 3s;">
+                        <div
+                            class="w-12 h-12 bg-orange-100 text-orange-500 rounded-full flex items-center justify-center text-xl">
+                            ⭐
+                        </div>
+                        <div>
+                            <p class="font-bold text-gray-900">4.9/5 Rating</p>
+                            <p class="text-sm text-gray-500">Dari 10k+ Pengguna</p>
+                        </div>
+                    </div>
                 </div>
 
             </div>
-
         </div>
-
     </section>
 
+    @yield('content')
+
+    <!-- Categories Section -->
+    @include('layout.pembeli._kategori')
+
+    <!-- Popular Services -->
+    @livewire('popular-services')
+
+    <!-- How it Works -->
+    @include('layout.pembeli._howitworks')
+
     <!-- Footer -->
-    <footer class="bg-slate-900 text-white py-8">
+    <footer class="bg-white border-t border-gray-100 pt-16 pb-8">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 mb-12">
+                <div class="col-span-2 lg:col-span-2">
+                    <a href="/" class="flex items-center gap-2 mb-6">
+                        <div
+                            class="w-8 h-8 bg-emerald-600 text-white flex items-center justify-center rounded-lg shadow-sm">
+                            <i class="fas fa-layer-group"></i>
+                        </div>
+                        <span class="font-bold text-xl tracking-tight text-gray-900">JasaMarket</span>
+                    </a>
+                    <p class="text-gray-500 mb-6 max-w-sm leading-relaxed">
+                        Platform marketplace jasa terpercaya yang menghubungkan talenta terbaik dengan klien di seluruh
+                        Indonesia.
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <a href="#"
+                            class="w-10 h-10 bg-gray-50 rounded-full flex items-center justify-center text-gray-500 hover:bg-emerald-50 hover:text-emerald-600 transition-colors"><i
+                                class="fab fa-twitter"></i></a>
+                        <a href="#"
+                            class="w-10 h-10 bg-gray-50 rounded-full flex items-center justify-center text-gray-500 hover:bg-emerald-50 hover:text-emerald-600 transition-colors"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a href="#"
+                            class="w-10 h-10 bg-gray-50 rounded-full flex items-center justify-center text-gray-500 hover:bg-emerald-50 hover:text-emerald-600 transition-colors"><i
+                                class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
 
-        <div class="container mx-auto px-6 text-center">
+                <div>
+                    <h4 class="font-bold text-gray-900 mb-4">Kategori</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-500 hover:text-emerald-600 transition-colors">Desain
+                                Grafis</a></li>
+                        <li><a href="#" class="text-gray-500 hover:text-emerald-600 transition-colors">Digital
+                                Marketing</a></li>
+                        <li><a href="#"
+                                class="text-gray-500 hover:text-emerald-600 transition-colors">Penulisan</a></li>
+                        <li><a href="#" class="text-gray-500 hover:text-emerald-600 transition-colors">Video &
+                                Animasi</a></li>
+                    </ul>
+                </div>
 
-            <h3 class="font-bold text-xl">
-                JasaMarket
-            </h3>
+                <div>
+                    <h4 class="font-bold text-gray-900 mb-4">Tentang</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-500 hover:text-emerald-600 transition-colors">Tentang
+                                Kami</a></li>
+                        <li><a href="#" class="text-gray-500 hover:text-emerald-600 transition-colors">Cara
+                                Kerja</a></li>
+                        <li><a href="#" class="text-gray-500 hover:text-emerald-600 transition-colors">Kebijakan
+                                Privasi</a></li>
+                        <li><a href="#" class="text-gray-500 hover:text-emerald-600 transition-colors">Syarat
+                                Ketentuan</a></li>
+                    </ul>
+                </div>
 
-            <p class="text-gray-400 mt-2">
-                Solusi Jasa & Layanan Terpercaya
-            </p>
+                <div>
+                    <h4 class="font-bold text-gray-900 mb-4">Dukungan</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-500 hover:text-emerald-600 transition-colors">Pusat
+                                Bantuan</a></li>
+                        <li><a href="#"
+                                class="text-gray-500 hover:text-emerald-600 transition-colors">Keamanan</a></li>
+                        <li><a href="#" class="text-gray-500 hover:text-emerald-600 transition-colors">Hubungi
+                                Kami</a></li>
+                    </ul>
+                </div>
+            </div>
 
+            <div class="pt-8 border-t border-gray-100 flex flex-col md:flex-row items-center justify-between gap-4">
+                <p class="text-sm text-gray-500">© 2026 JasaMarket. Hak Cipta Dilindungi.</p>
+                <div class="flex items-center gap-4 text-sm text-gray-500">
+                    <span>ID <i class="fas fa-chevron-down text-xs ml-1"></i></span>
+                    <span>Rp (IDR) <i class="fas fa-chevron-down text-xs ml-1"></i></span>
+                </div>
+            </div>
         </div>
-
     </footer>
-    <script>
-        const profileButton = document.getElementById('profileButton');
-        const profileMenu = document.getElementById('profileMenu');
-        
-        profileButton.addEventListener('click', () => {
-            profileMenu.classList.toggle('hidden');
-        });
-        
-        document.addEventListener('click', function(e) {
-            if (!profileButton.contains(e.target) &&
-                !profileMenu.contains(e.target)) {
-        
-                profileMenu.classList.add('hidden');
-            }
-        });
-    </script>
 
+
+
+    @include('layout._floatingbar')
+    @include('layout.script')
+    @livewireScripts
+    @include('layout._livewire-sweetalert')
+    @livewire('edit-profile')
 </body>
+
 </html>

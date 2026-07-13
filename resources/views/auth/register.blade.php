@@ -1,104 +1,174 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Register</title>
-
+    <title>Register - JasaMarket</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
 </head>
+<body class="bg-gray-50 min-h-screen flex items-center justify-center p-4">
+    
+    <!-- Background decoration -->
+    <div class="fixed inset-0 -z-10">
+        <div class="absolute top-0 right-0 -translate-y-12 translate-x-1/3 w-[800px] h-[800px] bg-gradient-to-tr from-emerald-200/40 to-teal-100/20 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 translate-y-1/3 -translate-x-1/3 w-[600px] h-[600px] bg-gradient-to-tr from-blue-100/40 to-emerald-100/40 rounded-full blur-3xl"></div>
+    </div>
 
-<body>
-    <section class="py-4 md:py-8">
-
-        <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-            <a href="/" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
-                <img class="w-[250px] h-[250px]" src="{{ asset('images/logojasamarket.png') }}">
-            </a>
-            <div
-                class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-                <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-                    <h1
-                        class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                        Create Your Account
-                    </h1>
-
-                    @if(session('failed')){
-                        <div class="alert">{{ session('failed') }}</div>
-                        }
-                    @endif
-                    <form class="space-y-4 md:space-y-6" method="post" action="/register">
-                        @csrf
-                        @error('email')
-                            <div class="text-red-500">{{ $message }}</div>
-                        @enderror
-                        <div>
-                            <label for="name"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your name</label>
-                            <input type="text" name="name" id="name"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-teal-600 focus:border-teal-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="Username" required="" value="{{ old('name') }}">
-                        </div>
-                        <div>
-                            <label for="email"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-                            <input type="email" name="email" id="email"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-teal-600 focus:border-teal-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="name@company.com" required="" value="{{ old('email') }}">
-                        </div>
-                        @error('email')
-                            <div class="text-red-500">{{ $message }}</div>
-                        @enderror
-                        <div>
-                            <label for="password"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                            <input type="password" name="password" id="password" placeholder="••••••••"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-teal-600 focus:border-teal-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                required="">
-                        </div>
-                        <div>
-                            <label for="confirm_password"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                            <input type="password" name="confirm_password" id="confirm_password" placeholder="Password_confirmation"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-teal-600 focus:border-teal-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                required="">
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-start">
-                                <div class="flex items-center h-5">
-                                    <input id="remember" aria-describedby="remember" type="checkbox" name="remember"
-                                        class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-teal-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-teal-600 dark:ring-offset-gray-800">
-                                </div>
-                                <div class="ml-3 text-sm">
-                                    <label for="remember" nae class="text-gray-500 dark:text-gray-300">Remember me</label>
-                                </div>
-                            </div>
-                            <a href=""
-                                class="text-sm font-medium text-teal-600 hover:underline dark:text-teal-500">Forgot
-                                password?</a>
-                        </div>
-
-                        <button type="submit" class="text-white bg-teal-600 py-1.5 px-4 rounded font-bold w-full">
-                            Sign in
-                        </button>
-
-
-
-                        <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-                            Already have an account? <a href="/login"
-                                class="font-medium text-teal-600 hover:underline dark:text-teal-500">Sign up</a>
-                        </p>
-                    </form>
-
-
+    <div class="w-full max-w-md">
+        <!-- Logo -->
+        <div class="text-center mb-8">
+            <a href="/" class="inline-flex items-center gap-2 group">
+                <div class="w-12 h-12 bg-emerald-600 text-white flex items-center justify-center rounded-xl shadow-sm group-hover:scale-105 transition-transform">
+                    <i class="fas fa-layer-group text-xl"></i>
                 </div>
-            </div>
+                <span class="font-bold text-2xl tracking-tight text-gray-900 group-hover:text-emerald-600 transition-colors">JasaMarket</span>
+            </a>
         </div>
 
-    </section>
-    @include('sweetalert::alert')
-</body>
+        <!-- Register Card -->
+        <div class="bg-white rounded-3xl shadow-xl shadow-emerald-900/5 border border-gray-100 p-8">
+            <div class="text-center mb-8">
+                <h1 class="text-2xl font-bold text-gray-900 mb-2">Buat Akun Baru</h1>
+                <p class="text-gray-500">Daftar untuk mulai menggunakan JasaMarket</p>
+            </div>
 
+            @if(session('failed'))
+                <div class="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl text-red-600 text-sm">
+                    {{ session('failed') }}
+                </div>
+            @endif
+
+            <form class="space-y-5" method="post" action="/register">
+                @csrf
+                
+                @error('name')
+                    <div class="text-red-500 text-sm mb-2">{{ $message }}</div>
+                @enderror
+                <div>
+                    <label for="name" class="block mb-2 text-sm font-medium text-gray-700">Nama Lengkap</label>
+                    <div class="relative">
+                        <i class="fas fa-user absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                        <input type="text" name="name" id="name"
+                            class="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-400"
+                            placeholder="Nama Anda" required value="{{ old('name') }}">
+                    </div>
+                </div>
+
+                @error('email')
+                    <div class="text-red-500 text-sm mb-2">{{ $message }}</div>
+                @enderror
+                <div>
+                    <label for="email" class="block mb-2 text-sm font-medium text-gray-700">Email</label>
+                    <div class="relative">
+                        <i class="fas fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                        <input type="email" name="email" id="email"
+                            class="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-400"
+                            placeholder="nama@email.com" required value="{{ old('email') }}">
+                    </div>
+                </div>
+
+                @error('password')
+                    <div class="text-red-500 text-sm mb-2">{{ $message }}</div>
+                @enderror
+                <div>
+                    <label for="password" class="block mb-2 text-sm font-medium text-gray-700">Password</label>
+                    <div class="relative">
+                        <i class="fas fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                        <input type="password" name="password" id="password"
+                            class="w-full pl-12 pr-12 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-400"
+                            placeholder="••••••••" required>
+                        <button type="button" onclick="togglePassword('password', this)" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                @error('confirm_password')
+                    <div class="text-red-500 text-sm mb-2">{{ $message }}</div>
+                @enderror
+                <div>
+                    <label for="confirm_password" class="block mb-2 text-sm font-medium text-gray-700">Konfirmasi Password</label>
+                    <div class="relative">
+                        <i class="fas fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                        <input type="password" name="confirm_password" id="confirm_password"
+                            class="w-full pl-12 pr-12 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-400"
+                            placeholder="••••••••" required>
+                        <button type="button" onclick="togglePassword('confirm_password', this)" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                @error('role')
+                    <div class="text-red-500 text-sm mb-2">{{ $message }}</div>
+                @enderror
+                <div>
+                    <label class="block mb-3 text-sm font-medium text-gray-700">Daftar sebagai</label>
+                    <div class="grid grid-cols-2 gap-4">
+                        <label class="relative cursor-pointer">
+                            <input type="radio" name="role" value="pembeli" class="peer sr-only" checked>
+                            <div class="p-4 bg-gray-50 border-2 border-gray-200 rounded-xl peer-checked:border-emerald-500 peer-checked:bg-emerald-50 transition-all hover:border-emerald-300">
+                                <div class="flex flex-col items-center text-center">
+                                    <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center mb-2 shadow-sm peer-checked:bg-emerald-100">
+                                        <i class="fas fa-shopping-bag text-emerald-600 text-xl"></i>
+                                    </div>
+                                    <span class="font-semibold text-gray-900 peer-checked:text-emerald-700">Pembeli</span>
+                                    <span class="text-xs text-gray-500 mt-1">Cari jasa</span>
+                                </div>
+                            </div>
+                        </label>
+                        <label class="relative cursor-pointer">
+                            <input type="radio" name="role" value="penjual" class="peer sr-only">
+                            <div class="p-4 bg-gray-50 border-2 border-gray-200 rounded-xl peer-checked:border-emerald-500 peer-checked:bg-emerald-50 transition-all hover:border-emerald-300">
+                                <div class="flex flex-col items-center text-center">
+                                    <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center mb-2 shadow-sm peer-checked:bg-emerald-100">
+                                        <i class="fas fa-store text-emerald-600 text-xl"></i>
+                                    </div>
+                                    <span class="font-semibold text-gray-900 peer-checked:text-emerald-700">Penjual</span>
+                                    <span class="text-xs text-gray-500 mt-1">Jual jasa</span>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full py-3 bg-emerald-600 text-white rounded-xl font-semibold hover:bg-emerald-700 transition-all hover:shadow-lg hover:shadow-emerald-500/25">
+                    Daftar
+                </button>
+            </form>
+
+            <div class="mt-6 text-center">
+                <p class="text-gray-500">
+                    Sudah punya akun? <a href="/login" class="font-semibold text-emerald-600 hover:text-emerald-700 transition-colors">Masuk</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    @include('sweetalert::alert')
+    
+    <script>
+        function togglePassword(inputId, button) {
+            const input = document.getElementById(inputId);
+            const icon = button.querySelector('i');
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+    </script>
+</body>
 </html>
